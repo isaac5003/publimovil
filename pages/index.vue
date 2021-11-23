@@ -3,47 +3,106 @@
     class="
       w-full
       h-screen
-      bg-gray-500
+      bg-gray-400
       flex flex-col
       items-center
       justify-center
     "
   >
-    <div
-      class="
-        form
-        w-2/6
-        h-1/2
-        bg-red-300
-        flex flex-row
-        items-center
-        justify-around
-      "
-    >
-      <ValidationObserver ref="form" v-slot="{ invalid }">
-        <form @submit.prevent="submit(user)" ref="form" :v-model="user">
-          <div>
+    <div class="w-full max-w-xs">
+      <form
+        class="bg-white shadow-md rounded flex flex-col items-center py-8 gap-4"
+        @submit.prevent="submit(user)"
+        ref="form"
+        :v-model="user"
+      >
+        <ValidationObserver ref="form" v-slot="{ invalid }">
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="username"
+            >
+              Nombre
+            </label>
             <ValidationProvider rules="required|alpha" v-slot="{ errors }">
-              <input type="text" v-model="user.name" />
-              <span class="text-red-600">{{ errors[0] }}</span>
+              <input
+                type="text"
+                v-model="user.name"
+                class="
+                  shadow
+                  appearance-none
+                  border
+                  rounded
+                  w-full
+                  py-2
+                  px-3
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none focus:shadow-outline
+                "
+                placeholder="Nombre"
+              />
+              <span class="text-red-600 block">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
-          <div>
+          <div class="mb-6">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="email"
+            >
+              Email
+            </label>
             <ValidationProvider rules="required|email" v-slot="{ errors }">
-              <input type="text" v-model="user.email" />
-              <span class="text-red-600">{{ errors[0] }}</span>
+              <input
+                type="text"
+                v-model="user.email"
+                class="
+                  shadow
+                  appearance-none
+                  border
+                  rounded
+                  w-full
+                  py-2
+                  px-3
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none focus:shadow-outline
+                "
+                placeholder="correo@example.com"
+              />
+              <span class="text-red-600 block">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
-          <div>
+          <div class="mb-6">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="password"
+            >
+              Telefono
+            </label>
             <ValidationProvider rules="required|digits:8" v-slot="{ errors }">
-              <input type="text" v-model="user.phone" />
-              <span class="text-red-600">{{ errors[0] }}</span>
+              <input
+                type="text"
+                v-model="user.phone"
+                class="
+                  shadow
+                  appearance-none
+                  border
+                  rounded
+                  w-full
+                  py-2
+                  px-3
+                  text-gray-700
+                  mb-3
+                  leading-tight
+                  focus:outline-none focus:shadow-outline
+                "
+              />
+              <span class="text-red-600 block">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
           <div>
             <button
-              type="submit"
-              size="small"
               class="
                 bg-blue-500
                 hover:bg-blue-700
@@ -54,13 +113,14 @@
                 rounded
                 focus:outline-none focus:shadow-outline
               "
+              type="submit"
               :disabled="invalid"
             >
-              Hola
+              Sign In
             </button>
           </div>
-        </form>
-      </ValidationObserver>
+        </ValidationObserver>
+      </form>
     </div>
   </div>
 </template>
