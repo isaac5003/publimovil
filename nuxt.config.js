@@ -22,7 +22,7 @@ export default {
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
-
+        "~/plugins/vee-validate.js"
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
@@ -30,14 +30,23 @@ export default {
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
-
+        '@nuxtjs/tailwindcss'
     ],
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
+        '@nuxtjs/axios'
     ],
+    axios: {
+        baseURL: "https://prize.manager.orangesoftco.com/",
+    },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
+        transpile: ["vee-validate/dist/rules"],
+        /*
+         ** You can extend webpack config here
+         */
+        extend(config, ctx) { }
     }
 }
