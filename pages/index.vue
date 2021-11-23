@@ -3,7 +3,7 @@
     class="
       w-full
       h-screen
-      bg-gray-400
+      bg-gray-300
       flex flex-col
       items-center
       justify-center
@@ -17,6 +17,59 @@
         :v-model="user"
       >
         <ValidationObserver ref="form" v-slot="{ invalid }">
+          <div class="mb-4 rounded bg-green-300 px-2 py-2" v-if="dataSave">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-green-600 inline-block"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <span class="inline-block text-green-600">{{ message }}</span>
+            </div>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-green-600 inline-block"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+              <span class="inline-block text-green-600">{{ user }}</span>
+            </div>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-green-600 inline-block"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"
+                />
+              </svg>
+              <span class="inline-block text-green-600">{{ id_user }}</span>
+            </div>
+          </div>
           <div class="mb-4">
             <label
               class="block text-gray-700 text-sm font-bold mb-2"
@@ -116,7 +169,7 @@
               type="submit"
               :disabled="invalid"
             >
-              Sign In
+              Guardar
             </button>
           </div>
         </ValidationObserver>
@@ -135,6 +188,10 @@ export default {
   data() {
     return {
       value: "",
+      user: "",
+      id_user: "",
+      dataSave: false,
+      message: "",
       user: {
         name: "",
         email: "",
@@ -153,6 +210,10 @@ export default {
 
       this.$axios.post("/api/v1/players", user, config).then((res) => {
         console.log(res);
+        this.message = res.data.message;
+        this.user = res.data.data.name;
+        this.id_user = res.data.data.id;
+        this.dataSave = true;
       });
     },
   },
